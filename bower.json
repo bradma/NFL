@@ -1,0 +1,14 @@
+{
+  "name": "nfl_app",
+  "description": "Martins NFL App",
+  "main": "gulpfile.js",
+  "authors": [
+    "Bradley Martin"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "chartist": "^0.9.8"
+  }
+}

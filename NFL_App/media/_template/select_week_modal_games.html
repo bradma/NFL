@@ -1,0 +1,6 @@
+{% comment %}
+	for href pass in items
+{% endcomment %}
+{% for items in weeks %}
+<a href="{% url 'user_main:detailView' MyUserSpecial items %}" class="btn btn-default btn-lg btn-block"><strong>{{ items }}</strong></a><br />
+{% endfor  %}

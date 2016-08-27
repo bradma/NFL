@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+	<head>
+		<title>Create Team Name</title>
+		<meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+		<link href="{% static "_css/bootstrap.min.css" %}" rel="stylesheet">
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="col-lg-1 col-lg-offset-6">
+						<div class="bs-component">
+							<a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="well well-lg">
+						<div class="page-header">
+							{% if team %}
+								<h1>Team Name: {{ team }}</h1>
+							{% else %}
+								<h1>Create Team Name</h1>
+							{% endif %}
+						</div>
+						<div>
+							<form method='post' action="">
+								{% csrf_token %}
+								{{ form }}
+						</div>
+					</div>
+					<p>
+						<input type="submit" value="Submit" class="btn btn-defualt btn-lg btn-block">
+					</p>
+					</form>
+					<p>
+						<p><a href="{% url 'user_main:user_core' user %}" class="btn btn-default btn-lg btn-block">Back</a></p>
+					</p>
+				</div>
+			</div>
+		</div>
+		<footer class ="navbar navbar-fixed-bottom">
+			<hr />
+			<div class="col-lg-4">
+				<p><h6>Created by: Bradley Martin</h6>
+			</div>
+		</footer>
+	</body>
+</html>

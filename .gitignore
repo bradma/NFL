@@ -1,0 +1,60 @@
+# SQLite3 database files:
+*.db
+
+# Linux Editors
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+.elc
+auto-save-list
+tramp
+.\#*
+*.swp
+*.swo
+
+# Mac
+.DS_Store
+._*
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Dev tools
+.idea
+.vagrant
+
+# SQLite
+*.sqlite3
+
+# Test Coverage Suite
+.coverage
+
+# projects dir
+projects/
+
+# static files
+static/
+static_dev/bower_components
+static_dev/sass/main/.sass-cache/
+
+# HTML coverage
+htmlcov/
+
+# Node
+node_modules/
+npm-debug.log
+config.codekit
+
+# Bower
+bower_components/
+
+# sqlite3
+db.sqlite3
+
+# PYC files
+*.pyc
+*.p
+
+

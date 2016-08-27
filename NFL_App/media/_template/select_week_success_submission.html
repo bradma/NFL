@@ -1,0 +1,58 @@
+{% extends 'week_base.html' %}
+{% load staticfiles %}
+{% load custom_tags %}
+
+
+{% block pagetitle %}{{ user }} - Picks Success{% endblock %}
+{% block head_scriptag %}
+	<link href="{% static "_css/table.min.css" %}" rel="stylesheet">
+{% endblock %}
+{% block body_content %}
+
+<h1>Games Submitted</h1> <!-- Move -->
+<h1>{{ user }} Picks</h1>
+	<div class="well">
+	<table>
+		<thead>
+			<th>Games</th>
+			<th>Picks</th>
+		</thead>
+		<tbody>
+			{% for selected in games %}
+				<tr>
+					<td>{{ selected.game_weeks }}</td>
+					{% if selected.pick == 0 %}
+						<td>{{ selected.game_weeks.home_team }}</td>
+					{% elif selected.pick == 1 %}
+						<td>{{ selected.game_weeks.away_team }}</td>
+					{% elif selected.pick == 3 %}
+						<td>Game not picked</td>
+					{% endif %}
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	</div>
+	<div class="row">
+		<div class="col-lg-5">
+			<p class="bs-component">
+				<a href="{% url 'user_main:user_core' user_id %}" class="btn btn-primary btn-lg">Done</a>
+			</p>
+		</div>
+	</div>
+<!--
+	get all games EX:
+	select user_id, pick from "Select_game_pick", "Select_game_week" where user_id=2 and week=1;
+	uuser ID and week pulled from URL
+	game_pick.objects.filter(game_weeks_id__week=1)
+	.filter(user_id__1)
+	results:
+		print stuff.user_id, stuff.game_weeks, stuff.pick
+	
+1 Eagles vs Cowboys 0
+1 Giants vs Titans 1
+1 Steelers vs Bills 1
+1 TeamOne vs TeamTwo 3
+
+-->
+{% endblock %}

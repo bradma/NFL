@@ -1,0 +1,25 @@
+{% comment %}
+	Used to display content when a user selects passed week
+	DEPRECIATED - REMOVE
+{% endcomment %}
+<table>
+	<thead>
+		{% for players in object_list %}
+			<th>{{ players.user.user_name }}</th>
+		{% endfor %}
+	</thead>
+	<tbody>
+		{% for selected in object_list %}
+			<tr>
+				<td>{{ selected.game_weeks }}</td>
+					{% if selected.pick == 0 %}
+						<td>{{ selected.game_weeks.home_team }}</td>
+					{% elif selected.pick == 1 %}
+						<td>{{ selected.game_weeks.away_team }}</td>
+					{% elif selected.pick == 3 %}
+						<td>Game not picked</td>
+					{% endif %}
+				</tr>
+		{% endfor %}
+	</tbody>
+</table>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>NFL Game Select App - Sign In</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link href="{% static "_css/bootstrap.min.css" %}" rel="stylesheet">
+	<link rel="stylesheet" href="{% static '_css/login_style.css' %}">
+</head>
+<body>
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<div id="logmsk" style="display: block;">
+		<div id='close'>X</div>
+			<div id="userbox">
+				<h1 id="signup" style="background-color: rgb(118, 171, 219); background-position: initial initial; background-repeat: initial initial;">Login</h1>
+			<div id="sumsk" style="display: none;">Loading</div>
+			<form method='post' action="">
+			{% csrf_token %}
+				 {{ loginForm.name }}
+				 {{ loginForm.passw }} 
+				<!-- <p id="logint" style="opacity: 1;">Sign Up!</p> -->
+				<button id="signupb" style="opacity: 0.2; cursor: default;">Login</button>
+			</form>
+			</div>
+	</div>
+	<script src="{% static '_js/login_index.js' %}"></script>
+</body>
+</html>

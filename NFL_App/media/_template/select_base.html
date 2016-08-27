@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load custom_tags %}
+
+<!-- base is journal -->
+<html>
+	<head>
+		<title>{% block pagetitle %} {% endblock %}</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link href="{% static "_css/bootstrap.min.css" %}" rel="stylesheet">
+		{% block head_scriptag %} {% endblock %}
+	</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="col-lg-1 col-lg-offset-10">
+					<div class="page-header">
+						<a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			{% comment %}
+				Side bar nav for weeks
+			{% endcomment %}
+			<div class="col-lg-3">
+				<div class="bs-component">
+					<div class="page-header text-center">
+						<h1>Weeks</h1>
+					</div>
+					<div class="panel panel-default">
+	  					<div class="panel-body text-center">	   						
+							<a data-toggle="modal"
+        						href="#"
+        						data-target="#smallModal"
+        						class="btn btn-primary btn-large"> Show Weeks </a>
+								<div class="modal fade" id="smallModal" tabindex="-1" role="dialog" aria-labelledby="smallModal" aria-hidden="true">
+								  <div class="modal-dialog modal-sm">
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								        <h4 class="modal-title" id="myModalLabel">Game Weeks</h4>
+								      </div>
+								      <div class="modal-body">
+								        	{% show_only_games_available %}
+								      </div>
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								      </div>
+								    </div>
+								  </div>
+								</div>
+	  					</div>
+					</div>
+				</div>
+			</div>
+			{% comment %}
+				Main content for selecting games
+			{% endcomment %}
+			<div class="col-lg-8">
+				{% block body_content %} {% endblock %}
+			</div>
+		</div>
+	</div>
+	<footer class ="footer">
+		<hr />
+		<div class="col-lg-4">
+			<p><h6>Created by: Bradley Martin</h6>
+		</div>
+	</footer>
+</body>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</html>

@@ -1,0 +1,81 @@
+{% extends 'select_base.html' %}
+{% load custom_filters %}
+{% block pagetitle %}Week {{ week }} Games{% endblock %}
+{% block head_scriptag %}
+<style>
+	label > input {
+		visibility: hidden;
+		position: absolute;
+	}
+
+	label > input + img {
+		cursor: pointer;
+		border: 2px solid transparent;
+	}
+
+	label > input:checked + img {
+		border: 2px solid #f00;
+	}
+</style>
+{% endblock %}
+
+{% block body_content %}
+	<div class="col-lg-10">
+		<div class="page-header">
+			<h1>Games for week {{ week }}</h1>
+		</div>
+		<p class="bs-component">
+		{% comment %}
+			Check to see if games exists otherwise print all games not available
+		{% endcomment %}
+			{% if game_all_picked > 0 %}
+				<form action="{% url 'user_main:week_one:submit' user week %}" method="post" class="form-horizontal">
+					{% csrf_token %}
+					{% for stuff in form %}
+						{% if forloop.first %}
+							<div class="well">
+						{% endif %}
+						{% if not stuff|is_game_picked %}
+						{% comment %}
+							Displays:
+								Label for game 'game1'
+								Game Selection and art
+							Starts inner well
+						{% endcomment %}
+							{% if 'game' in stuff.html_name  %}
+								<div class="well">
+									<p>{{ stuff.label }}</p>
+									<p>{{ stuff }}</p>
+						{% comment %}
+							Displays:
+								Time of game
+						{% endcomment %}
+							{% elif 'time' in stuff.html_name %}
+								<p>{{ stuff.label }}</p>
+						{% comment %}
+							Displays:
+								Game location
+						{% endcomment %}
+							{% elif 'location' in stuff.html_name %}
+								<p>{{ stuff.label }}</p>
+								</div>
+							{% endif %}
+							{% if forloop.last %}
+								</div>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+					<p>
+						<input type="submit" value="Done" class="btn btn-defualt btn-lg btn-block">
+						<a href="{% url 'user_main:user_core' user %}" class="btn btn-default btn-lg btn-block">Back</a>
+					</p>
+				</form>
+			{% else %}
+				<div class = "well">
+					<h2>All games have been selected for this week</h2>
+					<p><a href="{% url 'user_main:user_core' user %}" class="btn btn-default btn-lg btn-block">Back</a></p>
+				</div>
+			{% endif %}
+		</p>
+		</div>
+{% endblock %}
