@@ -56,5 +56,4 @@ db.sqlite3
 # PYC files
 *.pyc
 *.p
-
-
+env.py
