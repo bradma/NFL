@@ -12,7 +12,7 @@ def review_content(request, user_id, week_id):
     return render(request, template_name, context)
 
 def save_picks(request, picked_games, user):
-    items = request.body.split('&')
+    items = request.body.decode('utf-8').split('&')
     for updates in items:
         if 'game' in updates and not updates[updates.index('=')+1:] == 3:
             index_g = updates[updates.index('e')+1:updates.index('=')]
