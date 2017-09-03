@@ -11,19 +11,19 @@ class user(models.Model):
     class Meta:
         ordering = ["-total_week_wins"]
 
-    def __unicode__(self):
+    def __str__(self):
         return self.user_name
 
 class game_week(models.Model):
     home_team = models.CharField(max_length=30,)
     away_team = models.CharField(max_length=30,)
     time = models.CharField(max_length=30,)
-    location = models.CharField(max_length=30,)
+    location = models.CharField(max_length=255,)
     week = models.IntegerField(max_length=20,)
     home_score = models.IntegerField(max_length=20, default=0, null=True)
     away_score = models.IntegerField(max_length=20, default=0, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return ' vs '.join([
             self.home_team,
             self.away_team,
@@ -35,7 +35,7 @@ class game_pick(models.Model):
     user = models.ForeignKey(user)
     won = models.CharField(max_length=1, default='P')
 
-    def __unicode__(self):
+    def __str__(self):
         return ' '.join([
                 'Pick',
                 str(self.pick),
