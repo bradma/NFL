@@ -21,7 +21,10 @@ def render_email(breakdown, winners):
 def update_scores(current_week, games, mocked_data):
     home_team_nam = nfl_teams.switch_find_team_by_abbr(mocked_data[games]['home']['abbr'])
     game_obj = game_week.objects.filter(week=current_week).filter(home_team=home_team_nam)
-    this_game = game_obj[0]
+    try:
+        this_game = game_obj[0]
+    except IndexError:
+        import pdb;pdb.set_trace()
     this_game.home_score = mocked_data[games]['home']['score']['T']
     this_game.away_score = mocked_data[games]['away']['score']['T']
     this_game.save()
@@ -47,7 +50,7 @@ def update_game_score(curr_week):
                         game_played.save()
                         user_object = user.objects.get(id=game_played.user_id)
                         tac_win = user_object.wins
-                        user_object.wins = tac_win + 3
+                        user_object.wins = tac_win + 1
                         user_object.save()
                     else:
                         game_played.won = 'L'
@@ -88,12 +91,14 @@ def update_game_score(curr_week):
             one_winner.save()
 
     mass_usrs = [str(x.email) for x in User.objects.all() if x.email]
+    #mass_usrs= ['twinsen9@hotmail.com']
     msg_header = 'NFL - Martin Picks Summary'
 
     if winners:
         winner = winners[0]
 
     msg_body = render_email(breakdown, winner)
+    print(msg_body)
     from_email = 'DoNotReply@NFLApp.com'
 
     msg = EmailMessage(msg_header, msg_body, from_email, mass_usrs)
